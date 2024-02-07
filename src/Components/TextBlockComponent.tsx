@@ -13,11 +13,11 @@ export default function TextBlockComponent({data}:{data:TextBlock}) {
         </h1>
     }
     else if (data.type ==="h4"){
-        return <h4>
+        return <span>
             {data.children.map((child, index) => {
                 return <TextComponent key={index} data={child}/>
             })}
-        </h4>
+        </span>
     }else{
         return <div>Error</div>
     }

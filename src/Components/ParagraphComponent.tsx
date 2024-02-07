@@ -1,20 +1,24 @@
-import {Paragraph} from "../structures";
+import {Numbering, Paragraph} from "../structures";
 import ClauseComponent from "./ClauseComponent";
 
 import TextComponent from "./TextComponent";
 import MentionComponent from "./MentionComponent";
 
 import './ParagraphComponent.css';
-export default function ParagraphComponent({data}:{data: Paragraph}) {
+export default function ParagraphComponent({data, numbering}:{data: Paragraph,numbering:Numbering}) {
 
 
-        return <div className={"paragraph"}>
+        return <span className={"paragraph"}>
 
-            {data.text ?<div>{data.text}</div>:null}
+            {data.text ?<span>{data.text}</span>:null}
 
             {data.children?.map((child, index) => {
                 if ('type' in child && child.type ==="clause"){
-                    return <ClauseComponent key={index} data={child}/>
+                    numbering.number+=1
+                    return <ClauseComponent key={index} data={child} numbering={{
+                        layer: numbering.layer,
+                        number: numbering.number,
+                    }}/>
                 }
                 if ('type' in child && child.type ==="mention"){
                     return <MentionComponent key={index} data={child}/>
@@ -23,14 +27,17 @@ export default function ParagraphComponent({data}:{data: Paragraph}) {
                     return <TextComponent key={index} data={child}/>
                 }
                 if ("type" in child && child.type ==="p") {
-                    return <ParagraphComponent key={index} data={child}/>
+                    return <ParagraphComponent key={index} data={child} numbering={{
+                        layer: numbering.layer,
+                        number: numbering.number,
+                    }}/>
                 }
                 return <>error</>
 
 
 
             })}
-    </div>
+    </span>
 
 
 

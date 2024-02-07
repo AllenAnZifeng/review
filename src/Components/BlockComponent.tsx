@@ -1,11 +1,11 @@
-import {Block} from "../structures";
+import {Block, Numbering} from "../structures";
 import TextComponent from "./TextComponent";
 import MentionComponent from "./MentionComponent";
 import ListItemComponent from "./ListItemComponent";
 import ClauseComponent from "./ClauseComponent";
 import TextBlockComponent from "./TextBlockComponent";
 import ParagraphComponent from "./ParagraphComponent";
-export default function BlockComponent({data}:{data: Block}) {
+export default function BlockComponent({data,numbering}:{data: Block,numbering: Numbering}) {
 
      if (data.type === "ul") {
         return  <ul>
@@ -21,7 +21,11 @@ export default function BlockComponent({data}:{data: Block}) {
         return <div>
             {data.children.map((child, index) => {
                 if ("title" in child &&  child.type === "clause"){
-                    return <ClauseComponent key={index} data={child}/>
+                    numbering.number+=1
+                    return <ClauseComponent key={index} data={child} numbering={{
+                        layer: numbering.layer,
+                        number: numbering.number,
+                    }} />
                 }
 
                 if ("type" in child && child.type === "mention") {
@@ -34,10 +38,16 @@ export default function BlockComponent({data}:{data: Block}) {
                     return <TextBlockComponent key={index} data={child}/>
                 }
                 if ("type" in child && child.type ==="p") {
-                    return <ParagraphComponent key={index} data={child}/>
+                    return <ParagraphComponent key={index} data={child} numbering={{
+                        layer: numbering.layer,
+                        number: numbering.number,
+                    }}/>
                 }
                 if ("title" in child) {
-                    return <BlockComponent key={index} data={child}></BlockComponent>
+                    return <BlockComponent key={index} data={child} numbering={{
+                        layer: numbering.layer,
+                        number: numbering.number
+                    }}></BlockComponent>
                 }
                 return <>{(child as any).type}</>
             })}

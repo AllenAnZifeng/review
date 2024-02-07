@@ -42,10 +42,14 @@ export interface Paragraph {
     children?: (TextElement|Clause|Mention|Paragraph)[];
 }
 
+export interface Numbering{
+    layer: number,
+    number: number
+}
 
 export interface Block {
     title?: string;
-    type: "block"  | "ul";
+    type: "block" | "ul";
     children: (Block | ListItem | Clause | Mention | TextBlock | Paragraph)[];
 }
 
