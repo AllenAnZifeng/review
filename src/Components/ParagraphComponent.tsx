@@ -12,7 +12,6 @@ export default function ParagraphComponent({data}:{data: Paragraph}) {
 
             {data.text ?<div>{data.text}</div>:null}
 
-
             {data.children?.map((child, index) => {
                 if ('type' in child && child.type ==="clause"){
                     return <ClauseComponent key={index} data={child}/>
