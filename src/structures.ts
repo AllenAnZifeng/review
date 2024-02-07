@@ -39,7 +39,7 @@ export interface TextBlock {
 export interface Paragraph {
     type: "p";
     text?: string;
-    children: (TextElement|Clause|Mention|Paragraph)[];
+    children?: (TextElement|Clause|Mention|Paragraph)[];
 }
 
 

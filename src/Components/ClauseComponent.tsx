@@ -20,6 +20,9 @@ export default function ClauseComponent({data}:{data: Clause}) {
             if ("type" in child && (child.type === "block" || child.type === "ul")) {
                 return <BlockComponent key={index} data={child}></BlockComponent>
             }
+            if ("type" in child && child.type === "clause") {
+                return <ClauseComponent key={index} data={child}/>
+            }
 
         })}
     </div>
