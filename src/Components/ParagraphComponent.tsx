@@ -32,7 +32,7 @@ export default function ParagraphComponent({data, numbering}:{data: Paragraph,nu
                         number: numbering.number,
                     }}/>
                 }
-                return <>error</>
+                return <>errorP</>
 
 
 

@@ -20,7 +20,7 @@ export default function BlockComponent({data,numbering}:{data: Block,numbering: 
     } else { // type: Block
         return <div>
             {data.children.map((child, index) => {
-                if ("title" in child &&  child.type === "clause"){
+                if ("type" in child &&  child.type === "clause"){
                     numbering.number+=1
                     return <ClauseComponent key={index} data={child} numbering={{
                         layer: numbering.layer,
@@ -28,9 +28,6 @@ export default function BlockComponent({data,numbering}:{data: Block,numbering: 
                     }} />
                 }
 
-                if ("type" in child && child.type === "mention") {
-                    return <MentionComponent key={index} data={child}/>
-                }
                 if ("type" in child && child.type ==="h1") {
                     return <TextBlockComponent key={index} data={child}/>
                 }
@@ -43,13 +40,13 @@ export default function BlockComponent({data,numbering}:{data: Block,numbering: 
                         number: numbering.number,
                     }}/>
                 }
-                if ("title" in child) {
+                if ("type" in child && child.type ==="block") {
                     return <BlockComponent key={index} data={child} numbering={{
                         layer: numbering.layer,
                         number: numbering.number
                     }}></BlockComponent>
                 }
-                return <>{(child as any).type}</>
+                return <>{child.type}</>
             })}
         </div>
 

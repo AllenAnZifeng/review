@@ -7,7 +7,10 @@ export default function ListItemComponent({data}:{data: ListItem}) {
     return <li>
         {
             data.children.map((child, index) => {
-                return <ListItemContentComponent key={index} data={child}></ListItemContentComponent>
+                if('type' in child && child.type === "lic"){
+                    return <ListItemContentComponent key={index} data={child}></ListItemContentComponent>
+                }
+
             })
         }
     </li>

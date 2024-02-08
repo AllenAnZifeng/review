@@ -50,7 +50,7 @@ export interface Numbering{
 export interface Block {
     title?: string;
     type: "block" | "ul";
-    children: (Block | ListItem | Clause | Mention | TextBlock | Paragraph)[];
+    children: (Block | ListItem | Clause | TextBlock | Paragraph)[];
 }
 
 export type  Document = Block[];

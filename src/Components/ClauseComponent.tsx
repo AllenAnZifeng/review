@@ -6,18 +6,18 @@ import TextBlockComponent from "./TextBlockComponent";
 import ParagraphComponent from "./ParagraphComponent";
 
 const chars = 'abcdefghijklmnopqrstuvwxyz';
-export default function ClauseComponent({data,numbering}:{data: Clause,numbering:Numbering}) {
-let nextNumbering:Numbering={
-    layer: numbering.layer+1,
-    number: 0,
-}
+export default function ClauseComponent({data, numbering}: { data: Clause, numbering: Numbering }) {
+    let nextNumbering: Numbering = {
+        layer: numbering.layer + 1,
+        number: 0,
+    }
 
-let num;
-if (numbering.layer %2 === 1){
-    num = "("+chars[numbering.number-1]+") ";
-}else{
-    num = numbering.number + ". ";
-}
+    let num;
+    if (numbering.layer % 2 === 1) {
+        num = "(" + chars[numbering.number - 1] + ") ";
+    } else {
+        num = numbering.number + ". ";
+    }
     return <div>
         <div className={'empty'}>{"new line"}</div>
         <span>{num}</span>
